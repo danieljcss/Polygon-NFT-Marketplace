@@ -49,7 +49,7 @@ export default function ResellNFT() {
       <div className="w-1/2 flex flex-col pb-12">
         <input
           placeholder="Asset Price in MATIC"
-          className="mt-2 border rounded p-4"
+          className="mt-2 border rounded p-4 opacity-50"
           onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
         />
         {
@@ -57,7 +57,7 @@ export default function ResellNFT() {
             <img className="rounded mt-4" width="350" src={image} />
           )
         }
-        <button onClick={listNFTForSale} className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg">
+        <button onClick={listNFTForSale} className="font-bold mt-4 bg-violet-600 text-white rounded p-4 shadow-lg">
           List NFT
         </button>
       </div>
