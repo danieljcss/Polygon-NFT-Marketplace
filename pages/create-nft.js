@@ -82,14 +82,15 @@ export default function CreateItem() {
           onChange={e => updateFormInput({ ...formInput, description: e.target.value })}
         />
         <input
-          placeholder="Asset Price in Eth"
+          placeholder="Asset Price in MATIC"
           className="mt-2 border rounded p-4"
           onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
         />
         <input
           type="file"
           name="Asset"
-          className="my-4"
+          accept=".jpeg .png .webp .jpg .svg"
+          className="my-4 bg-white rounded"
           onChange={onChange}
         />
         {
