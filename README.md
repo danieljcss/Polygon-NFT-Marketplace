@@ -1,15 +1,29 @@
-# Basic Sample Hardhat Project
+# NFT Marketplace
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+This project shows how to implement a simple NFT marketplace on the Polygon Network (or any EVM compatible network). The on-chain logic is stored in `contracts/NFTMarketplace.sol`.
 
-Try running some of the following tasks:
+Necessary dependencies can be added by using
 
 ```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
+npm install
 ```
+
+To initialize the local Hardhat network we use
+
+```shell
+npx hardhat node
+```
+
+Then we deploy the main Solidity on a separate terminal by running
+
+```shell
+npx hardhat run scripts/deploy.js --network localhost
+```
+
+To start the Next.js app on a localhost we run
+
+```shell
+npm run dev
+```
+
+Project based on [Nader Dabit tutorial](https://dev.to/dabit3/building-scalable-full-stack-apps-on-ethereum-with-polygon-2cfb)
