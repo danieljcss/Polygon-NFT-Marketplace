@@ -73,21 +73,22 @@ export default function CreateItem() {
       <div className="w-1/2 flex flex-col pb-12">
         <input 
           placeholder="Asset Name"
-          className="mt-8 border rounded p-4 border-white/20 bg-white/20
+          className="mt-8 border rounded p-4 text-violet-200 border-white/20 bg-white/20
             placeholder:text-violet-300
             focus:outline-none focus:border-violet-200 focus:ring-1 focus:ring-violet-500"
           onChange={e => updateFormInput({ ...formInput, name: e.target.value })}
         />
         <textarea
           placeholder="Asset Description"
-          className="mt-2 border rounded p-4 border-white/20 bg-white/20
+          className="mt-2 border rounded p-4 text-violet-200 border-white/20 bg-white/20
           placeholder:text-violet-300
           focus:outline-none focus:border-violet-200 focus:ring-1 focus:ring-violet-500"
           onChange={e => updateFormInput({ ...formInput, description: e.target.value })}
         />
         <input
           placeholder="Asset Price in MATIC"
-          className="mt-2 border rounded p-4 border-white/20 bg-white/20
+          type="number" step="0.01" min="0"
+          className="mt-2 border rounded p-4 text-violet-200 border-white/20 bg-white/20
           placeholder:text-violet-300
           focus:outline-none focus:border-violet-200 focus:ring-1 focus:ring-violet-500"
           onChange={e => updateFormInput({ ...formInput, price: e.target.value })}

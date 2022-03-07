@@ -49,6 +49,7 @@ export default function ResellNFT() {
       <div className="w-1/2 flex flex-col pb-12">
         <input
           placeholder="Asset Price in MATIC"
+          type="number" step="0.01" min="0"
           className="mt-2 border rounded p-4 opacity-50"
           onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
         />

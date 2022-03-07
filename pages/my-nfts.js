@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from 'web3modal'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 import {
   marketplaceAddress
@@ -56,11 +57,23 @@ export default function MyAssets() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {
             nfts.map((nft, i) => (
-              <div key={i} className="border shadow rounded-xl overflow-hidden">
+              <div key={i} className="border border-violet-300 shadow rounded-xl overflow-hidden">
                 <img src={nft.image} className="rounded" />
-                <div className="p-4 bg-black">
-                  <p className="text-2xl font-bold text-white">Price - {nft.price} MATIC</p>
-                  <button className="mt-4 w-full bg-violet-600 text-white font-bold py-2 px-12 rounded" onClick={() => listNFT(nft)}>List</button>
+                <div className="p-4 bg-black grid grid-cols-10 items-center">
+                  <div className="col-span-8 items-center pr-3">
+                    <button className="w-full bg-violet-600 text-white font-bold py-2 px-12 rounded" onClick={() => listNFT(nft)}>List</button>
+                  </div>
+                  <div className="col-span-2 items-center">
+                    <div className="flex justify-end">
+                    <p className="text-xs text-violet-200 mr">Price</p>
+                    </div>
+                    <div className="flex justify-end">
+                      <Image src="/polygon-matic-logo.svg" alt="" height={16} width={16}/>
+                      <p className="font-semi-bold text-white ml-1">
+                        {nft.price}
+                      </p> 
+                    </div>
+                  </div> 
                 </div>
               </div>
             ))

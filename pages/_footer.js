@@ -84,17 +84,17 @@ function Footer() {
                     <h6 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">
                     Resources
                     </h6>
-                    <p className="mb-4">
-                    <a href="#!" className="text-violet-300">Help Center</a>
+                    <p className="mb-4 text-violet-300">
+                    <a href="#!"  className="transition duration-400 ease-in-out hover:text-violet-200">Help Center</a>
                     </p>
-                    <p className="mb-4">
-                    <a href="#!" className="text-violet-300">Commissions</a>
+                    <p className="mb-4 text-violet-300">
+                    <a href="#!" className="transition duration-400 ease-in-out hover:text-violet-200">Commissions</a>
                     </p>
-                    <p className="mb-4">
-                    <a href="#!" className="text-violet-300">Taxes</a>
+                    <p className="mb-4 text-violet-300">
+                    <a href="#!" className="transition duration-400 ease-in-out hover:text-violet-200">Taxes</a>
                     </p>
-                    <p>
-                    <a href="#!" className="text-violet-300">Docs</a>
+                    <p className="text-violet-300">
+                    <a href="#!" className="transition duration-400 ease-in-out hover:text-violet-200">Docs</a>
                     </p>
                 </div>
                 <div className="col-span-1 md:col-span-2 lg:col-span-2">
@@ -102,17 +102,17 @@ function Footer() {
                     Contact
                     </h6>
                     <p className="flex items-center justify-center md:justify-start mb-4 text-violet-300">
-                    <a href ="#!">About</a>
+                    <a href ="#!" className="transition duration-400 ease-in-out hover:text-violet-200">About</a>
                     </p>
                     <p className="flex items-center justify-center md:justify-start mb-4 text-violet-300">
-                    <a href ="mailto:contact@thisurl.com">contact@thisurl.com</a>
+                    <a href ="mailto:contact@thisurl.com" className="transition duration-400 ease-in-out hover:text-violet-200">contact@thisurl.com</a>
                     </p>
                 </div>
             </div>
         </div>
         <div className="text-center p-6">
             <span>Created by </span>
-            <a className="text-violet-300 font-semibold" href="https://github.com/danieljcss">danieljcss</a>
+            <a className="text-violet-300 font-semibold transition duration-400 ease-in-out hover:text-violet-200" href="https://github.com/danieljcss">danieljcss</a>
         </div>
         </footer>
     )
