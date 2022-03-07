@@ -74,25 +74,28 @@ export default function CreateItem() {
         <input 
           placeholder="Asset Name"
           className="mt-8 border rounded p-4 border-white/20 bg-white/20
-            placeholder:text-violet-300"
+            placeholder:text-violet-300
+            focus:outline-none focus:border-violet-200 focus:ring-1 focus:ring-violet-500"
           onChange={e => updateFormInput({ ...formInput, name: e.target.value })}
         />
         <textarea
           placeholder="Asset Description"
           className="mt-2 border rounded p-4 border-white/20 bg-white/20
-          placeholder:text-violet-300"
+          placeholder:text-violet-300
+          focus:outline-none focus:border-violet-200 focus:ring-1 focus:ring-violet-500"
           onChange={e => updateFormInput({ ...formInput, description: e.target.value })}
         />
         <input
           placeholder="Asset Price in MATIC"
           className="mt-2 border rounded p-4 border-white/20 bg-white/20
-          placeholder:text-violet-300"
+          placeholder:text-violet-300
+          focus:outline-none focus:border-violet-200 focus:ring-1 focus:ring-violet-500"
           onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
         />
         <input
           type="file"
           name="Asset"
-          accept=".jpeg .png .webp .jpg .svg"
+          accept=".jpeg, .png, .webp, .jpg, .svg, .gif"
           className="my-4 text-violet-200 rounded
             file:mr-4 file:py-2 file:px-4
             file:rounded file:border-0
@@ -106,7 +109,8 @@ export default function CreateItem() {
             <img className="rounded mt-4" width="350" src={fileUrl} />
           )
         }
-        <button onClick={listNFTForSale} className="font-bold mt-4 bg-violet-600 text-white rounded p-4 shadow-lg">
+        <button onClick={listNFTForSale} className="font-bold mt-4 bg-violet-600 text-white rounded p-4 shadow-lg
+        hover:bg-violet-700 transition-all ease-in-out duration-500">
           Create NFT
         </button>
       </div>

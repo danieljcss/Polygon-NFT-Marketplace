@@ -1,36 +1,19 @@
 import '../styles/globals.css'
 import Link from 'next/link'
+import Image from 'next/image'
+import Header from './_header'
+import Footer from './_footer'
+import { Container } from 'postcss'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div className="h-screen w-screen bg-gradient-to-tr from-dark-purple-900 via-dark-purple-700 to-dark-purple-900">
-      <div className="text-4xl pt-6 font-bold text-violet-100 flex justify-center">NFT Marketplace</div>
-      <nav className="border-b border-b-violet-300 p-6">
-        <div className="flex mt-2 justify-center gap-8">
-          <Link href="/">
-            <a className="mr-4 text-violet-300 transition duration-400 ease-in-out hover:text-violet-200">
-              Home
-            </a>
-          </Link>
-          <Link href="/create-nft">
-            <a className="mr-6 text-violet-300 transition duration-400 ease-in-out hover:text-violet-200">
-              Sell NFT
-            </a>
-          </Link>
-          <Link href="/my-nfts">
-            <a className="mr-6 text-violet-300 transition duration-400 ease-in-out hover:text-violet-200">
-              My NFTs
-            </a>
-          </Link>
-          <Link href="/dashboard">
-            <a className="mr-6 text-violet-300 transition duration-400 ease-in-out hover:text-violet-200">
-              Dashboard
-            </a>
-          </Link>
-        </div>
-      </nav>
-      <Component {...pageProps} />
-    </div>
+    <body className="min-h-screen bg-gradient-to-tr from-dark-purple-900 via-dark-purple-700 to-dark-purple-900">
+      <Header />
+      <div className="mt-4 mb-10 mx-4 md:mx-6 lg:mx-20">
+        <Component {...pageProps} />
+      </div>
+      <Footer />
+    </body>
   )
 }
 
