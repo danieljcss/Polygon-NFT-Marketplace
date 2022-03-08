@@ -1,4 +1,4 @@
-# NFT Marketplace
+# ![Alt text](public/logo.svg?raw=true "Logo") Polygon NFT Marketplace
 
 This project shows how to implement a simple NFT marketplace on the Polygon Network (or any EVM compatible network). The on-chain logic is stored in `contracts/NFTMarketplace.sol`.
 
@@ -30,7 +30,7 @@ npm run dev
 
 ## Deploy on Vercel
 
-This Next.js app is deployed using the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
+This Next.js app can be deployed for free using the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
 
 ## Technologies used
 

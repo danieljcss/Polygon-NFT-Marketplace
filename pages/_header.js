@@ -15,9 +15,9 @@ function Header() {
                 Home
                 </a>
             </Link>
-            <Link href="/create-nft">
+            <Link href="/mint-nft">
                 <a className="mr-6 text-violet-300 transition duration-400 ease-in-out hover:text-violet-200">
-                Sell NFT
+                Mint NFT
                 </a>
             </Link>
             <Link href="/my-nfts">
