@@ -4,7 +4,7 @@ import Image from 'next/image'
 function Footer() {
     return(
         <footer className="text-center lg:text-left text-violet-100 bg-black/10">
-        <div className="flex justify-center items-center lg:justify-between p-6 border-b border-b-violet-300 mx-4 md:mx-6 lg:mx-20">
+        <div className="flex justify-center items-center lg:justify-between p-6 mx-4 md:mx-6 lg:mx-20">
             <div className="mr-12 hidden lg:block">
             <span>Get connected with us on social networks:</span>
             </div>
@@ -61,6 +61,7 @@ function Footer() {
             </a>
             </div>
         </div>
+        <hr className="hr"/>
         <div className="mx-6 py-10 text-center md:text-left">
             <div className="grid grid-2 md:grid-cols-7 lg:grid-cols-7 gap-8 mx-4 md:mx-6 lg:mx-20">
                 <div className="col-span-2 md:col-span-3 lg:col-span-3">

@@ -3,7 +3,8 @@ import Image from 'next/image'
 
 function Header() {
     return(
-        <nav className="border-b border-b-violet-300 p-4 ">
+        <div>
+        <nav className="p-4 ">
             <div className="flex place-content-between items-center mx-4 md:mx-6 lg:mx-20">
             <a href="#" className="flex items-center">
             <Image src="/logo.svg" height={120} width={70} class=" sm:h-10" alt="NFT Logo" />
@@ -33,6 +34,8 @@ function Header() {
             </div>
             </div>
         </nav>
+        <hr className="hr"/>
+        </div>
     )
 }
 

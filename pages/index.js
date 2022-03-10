@@ -64,7 +64,7 @@ export default function Home() {
   if (loadingState === 'loaded' && !nfts.length) return (
     <div>
       <Banner />
-      <h1 className="px-20 py-10 text-3xl text-violet-100">No items in marketplace</h1>
+      <h1 className="px-20 py-10 text-2xl text-violet-100 flex justify-center">No items in marketplace</h1>
     </div>
   )
   return (

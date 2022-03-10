@@ -9,3 +9,12 @@
     margin: 0;
   }
 }
+
+@layer components {
+  .hr {
+    @apply leading-[1em] relative outline-0 border-0 text-center h-[0.2em] opacity-100;
+  }
+  .hr::before {
+    @apply absolute w-full h-[1px] left-0 top-1/2 content-[''] bg-gradient-to-r from-transparent via-violet-300 to-transparent;
+  }
+}
