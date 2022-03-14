@@ -53,7 +53,7 @@ export default function Home() {
     const signer = provider.getSigner()
     const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, signer)
 
-    /* user will be prompted to pay the asking proces to complete the transaction */
+    /* user will be prompted to pay the asking process to complete the transaction */
     const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')   
     const transaction = await contract.createMarketSale(nft.tokenId, {
       value: price
@@ -61,6 +61,16 @@ export default function Home() {
     await transaction.wait()
     loadNFTs()
   }
+
+  function shuffleArray(array) {
+    let shuffled = array
+    .map(value => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value)
+
+    return shuffled
+  }
+
   if (loadingState === 'loaded' && !nfts.length) return (
     <div>
       <Banner />
@@ -75,7 +85,7 @@ export default function Home() {
         <div className="px-4" style={{ maxWidth: '1600px' }}>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 pt-4">
             {
-              nfts.map((nft, i) => (
+              shuffleArray(nfts).slice(0,12).map((nft, i) => (
                 <div key={i} className="border border-violet-300 shadow rounded-xl overflow-hidden">
                   <img src={nft.image} alt=""/>
                   <div className="p-4">
