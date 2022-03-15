@@ -18,15 +18,16 @@ export default function ResellNFT() {
   const { image, price } = formInput
 
   useEffect(() => {
+    async function fetchNFT() {
+      if (!tokenURI) return
+      const meta = await axios.get(tokenURI)
+      updateFormInput(state => ({ ...state, image: meta.data.image }))
+    }
+  
     fetchNFT()
-  }, [id])
+  }, [id, tokenURI])
 
-  async function fetchNFT() {
-    if (!tokenURI) return
-    const meta = await axios.get(tokenURI)
-    updateFormInput(state => ({ ...state, image: meta.data.image }))
-  }
-
+  
   async function listNFTForSale() {
     if (!price) return
     const web3Modal = new Web3Modal()
