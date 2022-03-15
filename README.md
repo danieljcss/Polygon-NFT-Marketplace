@@ -35,7 +35,8 @@ This Next.js app can be deployed for free using the [Vercel Platform](https://ve
 ## Technologies used
 
 - Node.js: Backend and server
-- Next.js: Lightweight JavaScript Framework
+- React.js: a component based JavaScript Framework
+- Next.js: React Framework for production
 - Tailwind: CSS styling
 - Solidity: Smart contracts language
 - Hardat: Deployement and testing of smart contracts (+ waffle and chai)
