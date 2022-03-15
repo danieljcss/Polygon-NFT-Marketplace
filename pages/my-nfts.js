@@ -58,7 +58,7 @@ export default function MyAssets() {
           {
             nfts.map((nft, i) => (
               <div key={i} className="border border-violet-300 shadow rounded-xl overflow-hidden">
-                <img src={nft.image} className="rounded" />
+                <Image src={nft.image} alt="" width={500} height={500} layout='responsive' className="rounded"/>
                 <div className="p-4 bg-black grid grid-cols-10 items-center">
                   <div className="col-span-8 items-center pr-3">
                     <button className="w-full bg-violet-600 text-white font-bold py-2 px-12 rounded" onClick={() => listNFT(nft)}>List</button>

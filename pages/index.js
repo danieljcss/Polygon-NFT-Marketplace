@@ -87,7 +87,7 @@ export default function Home() {
             {
               shuffleArray(nfts).slice(0,12).map((nft, i) => (
                 <div key={i} className="border border-violet-300 shadow rounded-xl overflow-hidden">
-                  <img src={nft.image} alt=""/>
+                  <Image src={nft.image} alt="" width={500} height={500} layout='responsive'/>
                   <div className="p-4">
                     <p style={{ height: '45px' }} className="text-2xl font-semibold text-violet-100">{nft.name}</p>
                     <div style={{ height: '40px', overflow: 'hidden' }}>
