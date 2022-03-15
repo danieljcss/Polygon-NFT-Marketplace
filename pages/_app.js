@@ -1,9 +1,6 @@
 import '../styles/globals.css'
-import Link from 'next/link'
-import Image from 'next/image'
 import Header from './_header'
 import Footer from './_footer'
-import { Container } from 'postcss'
 
 function MyApp({ Component, pageProps }) {
   return (
