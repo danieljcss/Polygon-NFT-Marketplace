@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 import axios from 'axios'
 import Web3Modal from 'web3modal'
 
@@ -55,7 +56,7 @@ export default function ResellNFT() {
         />
         {
           image && (
-            <img className="rounded mt-4" width="350" src={image} />
+            <Image src={image} alt="" width={350} height={400} layout="responsive" className="rounded mt-4"/>
           )
         }
         <button onClick={listNFTForSale} className="font-bold mt-4 bg-violet-600 text-white rounded p-4 shadow-lg">
