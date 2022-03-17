@@ -72,13 +72,13 @@ export default function Home() {
   }
 
   if (loadingState === 'loaded' && !nfts.length) return (
-    <div>
+    <>
       <Banner />
       <h1 className="px-20 py-10 text-2xl text-violet-100 flex justify-center">No items in marketplace</h1>
-    </div>
+    </>
   )
   return (
-    <div>
+    <>
       <Banner />
       <h1 className="px-20 py-10 text-3xl text-violet-100 flex justify-center">Featured NFTs</h1>
       <div className="flex justify-center">
@@ -118,6 +118,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
