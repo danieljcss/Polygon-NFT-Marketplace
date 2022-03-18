@@ -29,9 +29,9 @@ export default function ResellNFT() {
 
   
   async function listNFTForSale() {
-    if (!price) return
+    if (!price) return /* TODO: Ask for price >0 */
     const web3Modal = new Web3Modal()
-    const connection = await web3Modal.connect()
+    const connection = await web3Modal.connect() /* TODO: Resolve promise when failed to connect to wallet*/
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()
 

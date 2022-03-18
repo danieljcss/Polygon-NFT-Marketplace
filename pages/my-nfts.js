@@ -16,14 +16,15 @@ export default function MyAssets() {
   const [loadingState, setLoadingState] = useState('not-loaded')
   const router = useRouter()
   useEffect(() => {
-    loadNFTs()
+    loadNFTs(connect())
   }, [])
+
   async function loadNFTs() {
     const web3Modal = new Web3Modal({
       network: "mainnet",
       cacheProvider: true,
     })
-    const connection = await web3Modal.connect()
+    const connection = await web3Modal.connect() /* TODO: Resolve promise when failed to connect to wallet*/
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()
 

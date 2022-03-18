@@ -37,6 +37,7 @@ export default function CreateItem() {
   async function uploadToIPFS() {
     const { name, description, price } = formInput
     if (!name || !description || !price || !fileUrl) return
+    /* TODO: Handle Error empty field */
     /* first, upload metadata to IPFS */
     const data = JSON.stringify({
       name, description, image: fileUrl
@@ -53,8 +54,8 @@ export default function CreateItem() {
 
   async function listNFTForSale() {
     const url = await uploadToIPFS()
-    const web3Modal = new Web3Modal()
-    const connection = await web3Modal.connect()
+    const web3Modal = new Web3Modal() 
+    const connection = await web3Modal.connect() /* TODO: Resolve promise when failed to connect to wallet*/
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()
 
