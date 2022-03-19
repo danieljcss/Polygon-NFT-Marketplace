@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from 'web3modal'
 import Image from 'next/image'
-import Banner from './_banner'
+import Banner from '../components/banner'
 
 import {
   marketplaceAddress

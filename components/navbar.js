@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-function Header() {
+function Navbar() {
     return(
         <>
         <nav className="p-4 ">
@@ -42,4 +42,4 @@ function Header() {
     )
 }
 
-export default Header
+export default Navbar
