@@ -16,7 +16,7 @@ export default function MyAssets() {
   const [loadingState, setLoadingState] = useState('not-loaded')
   const router = useRouter()
   useEffect(() => {
-    loadNFTs(connect())
+    loadNFTs()
   }, [])
 
   async function loadNFTs() {
