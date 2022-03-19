@@ -55,23 +55,32 @@ export default function CreateItem() {
   async function listNFTForSale() {
     const url = await uploadToIPFS()
     const web3Modal = new Web3Modal() 
-    const connection = await web3Modal.connect() /* TODO: Resolve promise when failed to connect to wallet*/
-    const provider = new ethers.providers.Web3Provider(connection)
-    const signer = provider.getSigner()
+    try {
+      const connection = await web3Modal.connect() /* TODO: Resolve promise when failed to connect to wallet*/
+      const provider = new ethers.providers.Web3Provider(connection)
+      const signer = provider.getSigner()
+    } catch (error) {
+      console.log('Wallet connection failed: ', error)
+    }
 
     /* Mint NFT */
-    const price = ethers.utils.parseUnits(formInput.price, 'ether')
-    let contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, signer)
-    let listingPrice = await contract.getListingPrice()
-    listingPrice = listingPrice.toString()
-    let transaction = await contract.createToken(url, price, { value: listingPrice })
-    await transaction.wait()
+    try {
+      const price = ethers.utils.parseUnits(formInput.price, 'ether')
+      let contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, signer)
+      let listingPrice = await contract.getListingPrice()
+      listingPrice = listingPrice.toString()
+      let transaction = await contract.createToken(url, price, { value: listingPrice })
+      await transaction.wait()
 
-    router.push('/')
+      router.push('/')
+    } catch (error) {
+      console.log('Price must be bigger than 0: ', error)
+    }
+    
   }
 
   return (
-    <div className="flex justify-center">
+    <form className="flex justify-center">
       <div className="w-1/2 flex flex-col pb-12">
         <input 
           placeholder="Asset Name"
@@ -79,6 +88,7 @@ export default function CreateItem() {
             placeholder:text-violet-300
             focus:outline-none focus:border-violet-200 focus:ring-1 focus:ring-violet-500"
           onChange={e => updateFormInput({ ...formInput, name: e.target.value })}
+          required
         />
         <textarea
           placeholder="Asset Description"
@@ -86,6 +96,7 @@ export default function CreateItem() {
           placeholder:text-violet-300
           focus:outline-none focus:border-violet-200 focus:ring-1 focus:ring-violet-500"
           onChange={e => updateFormInput({ ...formInput, description: e.target.value })}
+          required
         />
         <input
           placeholder="Asset Price in MATIC"
@@ -94,6 +105,7 @@ export default function CreateItem() {
           placeholder:text-violet-300
           focus:outline-none focus:border-violet-200 focus:ring-1 focus:ring-violet-500"
           onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
+          required
         />
         <input
           type="file"
@@ -106,6 +118,7 @@ export default function CreateItem() {
             file:bg-violet-50 file:text-violet-700
             hover:file:bg-violet-100"
           onChange={onChange}
+          required
         />
         {
           fileUrl && (
@@ -117,6 +130,6 @@ export default function CreateItem() {
           Create NFT
         </button>
       </div>
-    </div>
+    </form>
   )
 }
