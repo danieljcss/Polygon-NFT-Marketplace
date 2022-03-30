@@ -32,7 +32,7 @@ export default function CreateItem() {
       setFileUrl(url)
     } catch (error) {
       console.log('Error uploading file: ', error)
-    }  
+    }
   }
   async function uploadToIPFS() {
     const { name, description, price } = formInput
@@ -49,12 +49,12 @@ export default function CreateItem() {
       return url
     } catch (error) {
       console.log('Error uploading file: ', error)
-    }  
+    }
   }
 
   async function listNFTForSale() {
     const url = await uploadToIPFS()
-    const web3Modal = new Web3Modal() 
+    const web3Modal = new Web3Modal()
     try {
       const connection = await web3Modal.connect() /* TODO: Resolve promise when failed to connect to wallet*/
       const provider = new ethers.providers.Web3Provider(connection)
@@ -76,13 +76,13 @@ export default function CreateItem() {
     } catch (error) {
       console.log('Price must be bigger than 0: ', error)
     }
-    
+
   }
 
   return (
     <form className="flex justify-center">
       <div className="w-1/2 flex flex-col pb-12">
-        <input 
+        <input
           placeholder="Asset Name"
           className="mt-8 border rounded p-4 text-violet-200 border-white/20 bg-white/20
             placeholder:text-violet-300
@@ -95,6 +95,7 @@ export default function CreateItem() {
           className="mt-2 border rounded p-4 text-violet-200 border-white/20 bg-white/20
           placeholder:text-violet-300
           focus:outline-none focus:border-violet-200 focus:ring-1 focus:ring-violet-500"
+          resize="vertical"
           onChange={e => updateFormInput({ ...formInput, description: e.target.value })}
           required
         />
