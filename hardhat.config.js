@@ -1,5 +1,7 @@
-/* hardhat.config.js */
+require("dotenv").config()
 require("@nomiclabs/hardhat-waffle")
+
+const PRIVATE_KEY = process.env.PRIVATE_KEY
 
 module.exports = {
   defaultNetwork: "hardhat",
@@ -7,10 +9,10 @@ module.exports = {
     hardhat: {
       chainId: 1337
     },
-  //mumbai: {
-  //  url: "https://rpc-mumbai.maticvigil.com",
-   // accounts: [process.env.privateKey]
-  //}
+    mumbai: {
+      url: "https://rpc-mumbai.maticvigil.com",
+      accounts: [PRIVATE_KEY]
+    }
   },
   solidity: {
     version: "0.8.4",
