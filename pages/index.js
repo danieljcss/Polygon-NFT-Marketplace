@@ -43,7 +43,7 @@ export default function Home() {
       return item
     }))
     setNfts(items)
-    setLoadingState('loaded') 
+    setLoadingState('loaded')
   }
   async function buyNft(nft) {
     /* needs the user to sign the transaction, so will use Web3Provider and sign it */
@@ -54,7 +54,7 @@ export default function Home() {
     const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, signer)
 
     /* user will be prompted to pay the asking process to complete the transaction */
-    const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')   
+    const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')
     const transaction = await contract.createMarketSale(nft.tokenId, {
       value: price
     })
@@ -64,9 +64,9 @@ export default function Home() {
 
   function shuffleArray(array) {
     let shuffled = array
-    .map(value => ({ value, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ value }) => value)
+      .map(value => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value)
 
     return shuffled
   }
@@ -85,9 +85,9 @@ export default function Home() {
         <div className="px-4" style={{ maxWidth: '1600px' }}>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 pt-4">
             {
-              shuffleArray(nfts).slice(0,12).map((nft, i) => (
+              shuffleArray(nfts).slice(0, 12).map((nft, i) => (
                 <div key={i} className="border border-violet-300 shadow rounded-xl overflow-hidden">
-                  <Image src={nft.image} alt="" width={500} height={500} layout='responsive'/>
+                  <Image src={nft.image} alt="" width={500} height={500} layout='responsive' />
                   <div className="p-4">
                     <p style={{ height: '45px' }} className="text-2xl font-semibold text-violet-100">{nft.name}</p>
                     <div style={{ height: '40px', overflow: 'hidden' }}>
@@ -100,17 +100,17 @@ export default function Home() {
                     </div>
                     <div className="col-span-2 items-center">
                       <div className="flex justify-end">
-                      <p className="text-xs text-violet-200 mr">Price</p>
+                        <p className="text-xs text-violet-200 mr">Price</p>
                       </div>
                       <div className="flex justify-end">
-                        
-                        <Image src="/polygon-matic-logo.svg" alt="" height={16} width={16}/>
+
+                        <Image src="/polygon-matic-logo.svg" alt="" height={16} width={16} />
                         <p className="font-semi-bold text-white ml-1">
                           {nft.price}
-                        </p> 
+                        </p>
                       </div>
                     </div>
-                    
+
                   </div>
                 </div>
               ))

@@ -26,6 +26,7 @@
     "react-lottie-player": "^1.4.1",
     "styled-components": "^5.3.3",
     "tailwind.macro": "^1.0.0-alpha.10",
+    "tw-elements": "^1.0.0-alpha12",
     "web3modal": "^1.9.5"
   },
   "devDependencies": {

@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/tw-elements/dist/js/**/*.js",
   ],
   theme: {
     extend: {
@@ -15,8 +16,13 @@ module.exports = {
           900: '#1f0730',
         },
       },
+      screens: {
+        'lg': '992px',
+      },
     },
-    
+
   },
-  plugins: [],
+  plugins: [
+    require('tw-elements/dist/plugin'),
+  ]
 }
