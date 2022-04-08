@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-function Navbar() {
+function Navbar(props) {
     return (
         <>
             <nav className="p-4 
@@ -23,8 +23,9 @@ function Navbar() {
                         </a>
                     </Link>
                     <div className="order-1 lg:order-2 flex items-center ml-auto lg:ml-0">
-                        <button type="button"
-                            className="
+                        {props.account == null ? (
+                            <button type="button"
+                                className="
                                 text-violet-200
                                 hover:text-violet-100 
                                 bg-violet-700 
@@ -37,11 +38,34 @@ function Navbar() {
                                 text-sm
                                 text-center
                                 px-2 py-2.5 md:px-5 
-                                mr-2 md:mr-3 
+                                mr-2 md:mr-3 transition duration-400 ease-in-out
                             "
-                        >
-                            Connect Wallet
-                        </button>
+                                onClick={e => props.connect(e)}
+                            >
+                                Connect Wallet
+                            </button>
+                        ) : (
+                            <div className="text-violet-200
+                            hover:text-violet-100 
+                            bg-violet-700 
+                            hover:bg-violet-600 
+                            focus:ring-1 
+                            focus:outline-none 
+                            focus:ring-violet-300
+                            rounded-lg  
+                            font-medium 
+                            text-sm
+                            text-center
+                            px-2 py-2.5 md:px-5 
+                            mr-2 md:mr-3  transition duration-400 ease-in-out">
+                                <a
+                                    href={`https://mumbai.polygonscan.com/address//${props.account}`}
+                                    target="_blank" rel="noopener noreferrer"
+                                >
+                                    {`${props.account.slice(0, 10)}...`}
+                                </a>
+                            </div>
+                        )}
 
                         <button type="button"
                             className="
