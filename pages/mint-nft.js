@@ -3,17 +3,10 @@ import { ethers } from 'ethers'
 import { create as ipfsHttpClient } from 'ipfs-http-client'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import Web3Modal from 'web3modal'
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
-import {
-  marketplaceAddress
-} from '../config'
-
-import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
-
-export default function CreateItem() {
+export default function CreateItem(props) {
   const [fileUrl, setFileUrl] = useState(null)
   const [formInput, updateFormInput] = useState({ price: '', name: '', description: '' })
   const router = useRouter()
@@ -54,22 +47,13 @@ export default function CreateItem() {
 
   async function listNFTForSale() {
     const url = await uploadToIPFS()
-    const web3Modal = new Web3Modal()
-    try {
-      const connection = await web3Modal.connect() /* TODO: Resolve promise when failed to connect to wallet*/
-      const provider = new ethers.providers.Web3Provider(connection)
-      const signer = provider.getSigner()
-    } catch (error) {
-      console.log('Wallet connection failed: ', error)
-    }
 
     /* Mint NFT */
     try {
       const price = ethers.utils.parseUnits(formInput.price, 'ether')
-      let contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, signer)
-      let listingPrice = await contract.getListingPrice()
+      let listingPrice = await props.contract.getListingPrice()
       listingPrice = listingPrice.toString()
-      let transaction = await contract.createToken(url, price, { value: listingPrice })
+      let transaction = await props.contract.createToken(url, price, { value: listingPrice })
       await transaction.wait()
 
       router.push('/')

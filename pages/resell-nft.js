@@ -3,15 +3,8 @@ import { ethers } from 'ethers'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import axios from 'axios'
-import Web3Modal from 'web3modal'
 
-import {
-  marketplaceAddress
-} from '../config'
-
-import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
-
-export default function ResellNFT() {
+export default function ResellNFT(props) {
   const [formInput, updateFormInput] = useState({ price: '', image: '' })
   const router = useRouter()
   const { id, tokenURI } = router.query
@@ -23,24 +16,19 @@ export default function ResellNFT() {
       const meta = await axios.get(tokenURI)
       updateFormInput(state => ({ ...state, image: meta.data.image }))
     }
-  
+
     fetchNFT()
   }, [id, tokenURI])
 
-  
+
   async function listNFTForSale() {
     if (!price) return /* TODO: Ask for price >0 */
-    const web3Modal = new Web3Modal()
-    const connection = await web3Modal.connect() /* TODO: Resolve promise when failed to connect to wallet*/
-    const provider = new ethers.providers.Web3Provider(connection)
-    const signer = provider.getSigner()
 
     const priceFormatted = ethers.utils.parseUnits(formInput.price, 'ether')
-    let contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, signer)
-    let listingPrice = await contract.getListingPrice()
+    let listingPrice = await props.contract.getListingPrice()
 
     listingPrice = listingPrice.toString()
-    let transaction = await contract.resellToken(id, priceFormatted, { value: listingPrice })
+    let transaction = await props.contract.resellToken(id, priceFormatted, { value: listingPrice })
     await transaction.wait()
 
     router.push('/')
@@ -57,7 +45,7 @@ export default function ResellNFT() {
         />
         {
           image && (
-            <Image src={image} alt="" width={350} height={400} layout="responsive" className="rounded mt-4"/>
+            <Image src={image} alt="" width={350} height={400} layout="responsive" className="rounded mt-4" />
           )
         }
         <button onClick={listNFTForSale} className="font-bold mt-4 bg-violet-600 text-white rounded p-4 shadow-lg">

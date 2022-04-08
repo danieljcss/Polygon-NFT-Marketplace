@@ -1,17 +1,10 @@
 import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import Web3Modal from 'web3modal'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 
-import {
-  marketplaceAddress
-} from '../config'
-
-import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
-
-export default function MyAssets() {
+export default function MyAssets(props) {
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
   const router = useRouter()
@@ -20,19 +13,10 @@ export default function MyAssets() {
   }, [])
 
   async function loadNFTs() {
-    const web3Modal = new Web3Modal({
-      network: "mainnet",
-      cacheProvider: true,
-    })
-    const connection = await web3Modal.connect() /* TODO: Resolve promise when failed to connect to wallet*/
-    const provider = new ethers.providers.Web3Provider(connection)
-    const signer = provider.getSigner()
-
-    const marketplaceContract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, signer)
-    const data = await marketplaceContract.fetchMyNFTs()
+    const data = await props.contract.fetchMyNFTs()
 
     const items = await Promise.all(data.map(async i => {
-      const tokenURI = await marketplaceContract.tokenURI(i.tokenId)
+      const tokenURI = await props.contract.tokenURI(i.tokenId)
       const meta = await axios.get(tokenURI)
       let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
       let item = {
@@ -46,7 +30,7 @@ export default function MyAssets() {
       return item
     }))
     setNfts(items)
-    setLoadingState('loaded') 
+    setLoadingState('loaded')
   }
   function listNFT(nft) {
     router.push(`/resell-nft?id=${nft.tokenId}&tokenURI=${nft.tokenURI}`)
@@ -59,22 +43,22 @@ export default function MyAssets() {
           {
             nfts.map((nft, i) => (
               <div key={i} className="border border-violet-300 shadow rounded-xl overflow-hidden">
-                <Image src={nft.image} alt="" width={500} height={500} layout='responsive' className="rounded"/>
+                <Image src={nft.image} alt="" width={500} height={500} layout='responsive' className="rounded" />
                 <div className="p-4 bg-black grid grid-cols-10 items-center">
                   <div className="col-span-8 items-center pr-3">
                     <button className="w-full bg-violet-600 text-white font-bold py-2 px-12 rounded" onClick={() => listNFT(nft)}>List</button>
                   </div>
                   <div className="col-span-2 items-center">
                     <div className="flex justify-end">
-                    <p className="text-xs text-violet-200 mr">Price</p>
+                      <p className="text-xs text-violet-200 mr">Price</p>
                     </div>
                     <div className="flex justify-end">
-                      <Image src="/polygon-matic-logo.svg" alt="" height={16} width={16}/>
+                      <Image src="/polygon-matic-logo.svg" alt="" height={16} width={16} />
                       <p className="font-semi-bold text-white ml-1">
                         {nft.price}
-                      </p> 
+                      </p>
                     </div>
-                  </div> 
+                  </div>
                 </div>
               </div>
             ))

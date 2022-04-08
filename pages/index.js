@@ -1,34 +1,29 @@
 import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import Web3Modal from 'web3modal'
 import Image from 'next/image'
 import Banner from '../components/banner'
 
-import {
-  marketplaceAddress
-} from '../config'
 
-import NFTMarketplace from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json'
-
-export default function Home() {
+export default function Home(props) {
   const [nfts, setNfts] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
   useEffect(() => {
-    loadNFTs()
-  }, [])
+    if (props.contract !== null && props.provider !== null) {
+      loadNFTs()
+    }
+  }, [props.contract, props.provider])
+
   async function loadNFTs() {
-    /* create a generic provider and query for unsold market items */
-    const provider = new ethers.providers.JsonRpcProvider()
-    const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, provider)
-    const data = await contract.fetchMarketItems()
+    /* Query for unsold market items */
+    const data = await props.contract.fetchMarketItems()
 
     /*
     *  map over items returned from smart contract and format 
     *  them as well as fetch their token metadata
     */
     const items = await Promise.all(data.map(async i => {
-      const tokenUri = await contract.tokenURI(i.tokenId)
+      const tokenUri = await props.contract.tokenURI(i.tokenId)
       const meta = await axios.get(tokenUri)
       let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
       let item = {
@@ -46,16 +41,19 @@ export default function Home() {
     setLoadingState('loaded')
   }
   async function buyNft(nft) {
-    /* needs the user to sign the transaction, so will use Web3Provider and sign it */
-    const web3Modal = new Web3Modal()
-    const connection = await web3Modal.connect() /* TODO: Resolve promise when failed to connect to wallet*/
-    const provider = new ethers.providers.Web3Provider(connection)
-    const signer = provider.getSigner()
-    const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, signer)
+    // /* needs the user to sign the transaction, so will use Web3Provider and sign it */
+    // const web3Modal = new Web3Modal()
+    // const connection = await web3Modal.connect() /* TODO: Resolve promise when failed to connect to wallet*/
+    // const provider = new ethers.providers.Web3Provider(connection)
+    // const signer = provider.getSigner()
+    // const contract = new ethers.Contract(marketplaceAddress, NFTMarketplace.abi, signer)
+
+    /* needs the user to sign the transaction, so will connect to a provider if not done yet */
+    props.connect()
 
     /* user will be prompted to pay the asking process to complete the transaction */
     const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')
-    const transaction = await contract.createMarketSale(nft.tokenId, {
+    const transaction = await props.contract.createMarketSale(nft.tokenId, {
       value: price
     })
     await transaction.wait()
@@ -77,6 +75,7 @@ export default function Home() {
       <h1 className="px-20 py-10 text-2xl text-violet-100 flex justify-center">No items in marketplace</h1>
     </>
   )
+
   return (
     <>
       <Banner />
