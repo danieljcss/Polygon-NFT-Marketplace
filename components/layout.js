@@ -9,7 +9,9 @@ export default function Layout(props) {
         <title>NFT Marketplace</title>
       </Head>
       <Navbar account={props.account} connect={props.connect} />
-      <main>{props.children}</main>
+      <main>
+        {props.children}
+      </main>
       <Footer />
     </>
   )

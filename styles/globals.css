@@ -18,3 +18,9 @@
     @apply absolute w-full h-[1px] left-0 top-1/2 content-[''] bg-gradient-to-r from-transparent via-violet-300 to-transparent;
   }
 }
+
+#__next {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
