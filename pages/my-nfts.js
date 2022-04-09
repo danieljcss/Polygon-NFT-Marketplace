@@ -9,8 +9,10 @@ export default function MyAssets(props) {
   const [loadingState, setLoadingState] = useState('not-loaded')
   const router = useRouter()
   useEffect(() => {
-    loadNFTs()
-  }, [])
+    if (props.account != null) {
+      loadNFTs()
+    }
+  }, [props.account])
 
   async function loadNFTs() {
     const data = await props.contract.fetchMyNFTs()
@@ -32,17 +34,32 @@ export default function MyAssets(props) {
     setNfts(items)
     setLoadingState('loaded')
   }
+
   function listNFT(nft) {
     router.push(`/resell-nft?id=${nft.tokenId}&tokenURI=${nft.tokenURI}`)
   }
-  if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-2xl text-violet-100 flex justify-center">No NFTs owned</h1>)
+
+  if (props.account == null) {
+    return (
+      <h1 className="py-10 px-20 text-xl text-violet-100 flex justify-center">
+        Please connect your wallet
+      </h1>
+    )
+  }
+  if (loadingState === 'loaded' && !nfts.length) {
+    return (
+      <h1 className="py-10 px-20 text-2xl text-violet-100 flex justify-center">
+        No NFTs owned
+      </h1>
+    )
+  }
   return (
     <div className="flex justify-center">
       <div className="p-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {
             nfts.map((nft, i) => (
-              <div key={i} className="border border-violet-300 shadow rounded-xl overflow-hidden">
+              <div key={i} className="border border-violet-300 shadow hover:shadow-violet-100/50 hover:shadow-md rounded-xl overflow-hidden hover:scale-[1.01] transition duration-300 ease-in-out">
                 <Image src={nft.image} alt="" width={500} height={500} layout='responsive' className="rounded" />
                 <div className="p-4 bg-black grid grid-cols-10 items-center">
                   <div className="col-span-8 items-center pr-3">
