@@ -41,14 +41,14 @@ export default function MyAssets(props) {
 
   if (props.account == null) {
     return (
-      <h1 className="py-10 px-20 text-xl text-violet-100 flex justify-center">
+      <h1 className="px-10 py-10 xs:px-20 text-xl text-violet-100 flex justify-center">
         Please connect your wallet
       </h1>
     )
   }
   if (loadingState === 'loaded' && !nfts.length) {
     return (
-      <h1 className="py-10 px-20 text-2xl text-violet-100 flex justify-center">
+      <h1 className="px-10 py-10 xs:px-20 text-2xl text-violet-100 flex justify-center">
         No NFTs owned
       </h1>
     )

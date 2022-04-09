@@ -72,7 +72,7 @@ export default function CreateItem(props) {
 
   return (
     <form className="flex justify-center">
-      <div className="w-1/2 flex flex-col pb-12">
+      <div className="w-3/4 sm:w-1/2 flex flex-col pb-12">
         <input
           placeholder="Asset Name"
           className="mt-8 border rounded p-4 text-violet-200 border-white/20 bg-white/20
