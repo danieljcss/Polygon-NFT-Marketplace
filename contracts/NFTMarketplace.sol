@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-import "hardhat/console.sol";
+//import "hardhat/console.sol";
 
 contract NFTMarketplace is ERC721URIStorage {
     using Counters for Counters.Counter;
@@ -33,7 +33,7 @@ contract NFTMarketplace is ERC721URIStorage {
       bool sold
     );
 
-    constructor() ERC721("Metaverse Tokens", "METT") {
+    constructor() ERC721("NFT Polygon", "NFTP") {
       owner = payable(msg.sender);
     }
 
