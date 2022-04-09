@@ -38,7 +38,7 @@ function Navbar(props) {
                                 text-sm
                                 text-center
                                 px-2 py-2.5 md:px-5 
-                                mr-2 md:mr-3 transition duration-400 ease-in-out
+                                mr-2 md:mr-3 transition duration-300 ease-in-out
                             "
                                 onClick={e => props.connect(e)}
                             >
@@ -57,7 +57,7 @@ function Navbar(props) {
                             text-sm
                             text-center
                             px-2 py-2.5 md:px-5 
-                            mr-2 md:mr-3  transition duration-400 ease-in-out">
+                            mr-2 md:mr-3  transition duration-300 ease-in-out">
                                 <a
                                     href={`https://mumbai.polygonscan.com/address//${props.account}`}
                                     target="_blank" rel="noopener noreferrer"
@@ -98,28 +98,28 @@ function Navbar(props) {
                         <ul className="navbar-nav flex pl-0 list-style-none">
                             <li className="nav-item px-2">
                                 <Link href="/">
-                                    <a className="mr-4 text-violet-300 transition duration-400 ease-in-out hover:text-violet-200">
+                                    <a className="mr-4 text-violet-300 transition duration-300 ease-in-out hover:text-violet-200">
                                         Home
                                     </a>
                                 </Link>
                             </li>
                             <li className="nav-item pr-2">
                                 <Link href="/explore">
-                                    <a className="mr-6 text-violet-300 transition duration-400 ease-in-out hover:text-violet-200">
+                                    <a className="mr-6 text-violet-300 transition duration-300 ease-in-out hover:text-violet-200">
                                         Explore
                                     </a>
                                 </Link>
                             </li>
                             <li className="nav-item pr-2">
                                 <Link href="/mint-nft">
-                                    <a className="mr-6 text-violet-300 transition duration-400 ease-in-out hover:text-violet-200">
+                                    <a className="mr-6 text-violet-300 transition duration-300 ease-in-out hover:text-violet-200">
                                         Mint NFT
                                     </a>
                                 </Link>
                             </li>
                             <li className="nav-item pr-2">
                                 <Link href="/my-nfts">
-                                    <a className="text-violet-300 transition duration-400 ease-in-out hover:text-violet-200">
+                                    <a className="text-violet-300 transition duration-300 ease-in-out hover:text-violet-200">
                                         My NFTs
                                     </a>
                                 </Link>
