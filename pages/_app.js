@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }) {
     init()
   }, [])
 
+  // Connects by Default
   async function init() {
     const connect = await web3Load()
     setProvider(connect.provider)
@@ -22,12 +23,15 @@ function MyApp({ Component, pageProps }) {
     }
   }
 
+  // Connects to Metamask if not done yet
   async function connect(e) {
     e.preventDefault()
     const connect = await web3Connect()
     setAccount(connect.account)
     setProvider(connect.provider)
     setContract(connect.contract)
+
+    return (connect)
   }
 
   return (
