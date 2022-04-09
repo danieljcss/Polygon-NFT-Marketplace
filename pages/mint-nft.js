@@ -8,6 +8,7 @@ const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
 export default function CreateItem(props) {
   const [fileUrl, setFileUrl] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
   const [formInput, updateFormInput] = useState({ price: '', name: '', description: '' })
   const router = useRouter()
 
@@ -29,7 +30,10 @@ export default function CreateItem(props) {
   }
   async function uploadToIPFS() {
     const { name, description, price } = formInput
-    if (!name || !description || !price || !fileUrl) return
+    if (!name || !description || !price || !fileUrl) {
+      console.log("NO NAME")
+      return
+    }
     /* TODO: Handle Error empty field */
     /* first, upload metadata to IPFS */
     const data = JSON.stringify({
@@ -45,7 +49,9 @@ export default function CreateItem(props) {
     }
   }
 
-  async function listNFTForSale() {
+  async function listNFTForSale(e) {
+    e.preventDefault()
+    setIsLoading(true)
     const url = await uploadToIPFS()
 
     /* Mint NFT */
@@ -56,7 +62,8 @@ export default function CreateItem(props) {
       let transaction = await props.contract.createToken(url, price, { value: listingPrice })
       await transaction.wait()
 
-      router.push('/')
+      setIsLoading(false)
+      router.push('/explore')
     } catch (error) {
       console.log('Price must be bigger than 0: ', error)
     }
@@ -95,7 +102,7 @@ export default function CreateItem(props) {
         <input
           type="file"
           name="Asset"
-          accept=".jpeg, .png, .webp, .jpg, .svg, .gif"
+          accept=".jpeg, .png, .webp, .jpg, .gif"
           className="my-4 text-violet-200 rounded
             file:mr-4 file:py-2 file:px-4
             file:rounded file:border-0
@@ -110,10 +117,23 @@ export default function CreateItem(props) {
             <Image src={fileUrl} alt="" width={400} height={400} layout='responsive' className="rounded mt-4 mx-auto" />
           )
         }
-        <button onClick={listNFTForSale} className="font-bold mt-4 bg-violet-600 text-white rounded p-4 shadow-lg
-        hover:bg-violet-700 transition-all ease-in-out duration-500">
-          Create NFT
-        </button>
+        {isLoading ? (
+          <button disabled className="font-bold mt-4 bg-violet-600 text-white rounded p-4 shadow-lg transition-all ease-in-out duration-500">
+            <div className="spinner-border animate-spin
+              inline-block
+              w-7 h-7
+              border-4 rounded-full
+              text-violet-100
+            " role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </button>
+        ) : (
+          <button onClick={e => listNFTForSale(e)} className="font-bold mt-4 bg-violet-600 text-white rounded p-4 shadow-lg hover:bg-violet-700 transition-all ease-in-out duration-500">
+            Create NFT
+          </button>
+        )}
+
       </div>
     </form>
   )
