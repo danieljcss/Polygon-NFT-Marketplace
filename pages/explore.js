@@ -68,18 +68,35 @@ export default function CreatorDashboard(props) {
     return shuffled
   }
 
-  if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl text-violet-100 flex justify-center">No NFTs listed</h1>)
+  if (loadingState === 'loaded' && !nfts.length) {
+    return (
+      <h1 className="py-10 px-20 text-3xl text-violet-100 flex justify-center">No NFTs listed</h1>
+    )
+  }
   return (
     <div>
       <div className="p-4">
         <h2 className="text-2xl py-2 text-violet-100 flex justify-center">Listed NFTs</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-          {
-            nfts.map((nft, i) => (
-              <NFTBlock key={i} nft={nft} buyNft={buyNft} />
-            ))
-          }
-        </div>
+        {loadingState === 'loaded' && nfts.length ? (
+          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-4">
+            {
+              nfts.map((nft, i) => (
+                <NFTBlock key={i} nft={nft} buyNft={buyNft} />
+              ))
+            }
+          </div>
+        ) : (
+          <div className="text-center my-10">
+            <div className="spinner-border animate-spin
+            inline-block
+            w-10 h-10
+            border-4 rounded-full
+            text-violet-100
+            " role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

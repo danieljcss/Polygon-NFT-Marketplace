@@ -16,10 +16,10 @@ function Navbar(props) {
                 <div className="container-fluid w-full flex flex-wrap items-center mx-4 md:mx-6 lg:mx-20">
                     <Link href="/">
                         <a className="flex items-center">
-                            <div className="w-12 h-20 md:w-20 md:h-36">
+                            <div className="w-8 h-15 xs:w-12 xs:h-20 md:w-20 md:h-36">
                                 <Image src="/logo.svg" height={120} width={70} layout="responsive" alt="NFT Logo" />
                             </div>
-                            <span className="flex self-center text-lg md:text-2xl font-semibold text-violet-100 ml-3 mr-2 md:mr-6 w-28 md:w-30 xl:w-auto">Polygon Marketplace</span>
+                            <span className="flex self-center text-sm xs:text-lg md:text-2xl font-semibold text-violet-100 ml-3 mr-2 md:mr-6 w-28 md:w-30 xl:w-auto">Polygon Marketplace</span>
                         </a>
                     </Link>
                     <div className="order-1 lg:order-2 flex items-center ml-auto lg:ml-0">
@@ -35,9 +35,9 @@ function Navbar(props) {
                                 focus:ring-violet-300
                                 rounded-lg  
                                 font-medium 
-                                text-sm
+                                text-xs xs:text-sm
                                 text-center
-                                px-2 py-2.5 md:px-5 
+                                px-2 py-2 xs:py-2.5 md:px-5 
                                 mr-2 md:mr-3 transition duration-300 ease-in-out
                             "
                                 onClick={e => props.connect(e)}
@@ -75,7 +75,7 @@ function Navbar(props) {
                                 border-0
                                 hover:shadow-none hover:no-underline
                                 py-2
-                                px-2.5
+                                px-0 xs:px-2.5
                                 bg-transparent
                                 focus:outline-none focus:ring-0 focus:shadow-none focus:no-underline"
                             data-bs-toggle="collapse"
@@ -98,21 +98,21 @@ function Navbar(props) {
                         <ul className="navbar-nav flex pl-0 list-style-none">
                             <li className="nav-item px-2">
                                 <Link href="/">
-                                    <a className="mr-4 text-violet-300 transition duration-300 ease-in-out hover:text-violet-200">
+                                    <a className="mr-2 xs:mr-4 text-violet-300 transition duration-300 ease-in-out hover:text-violet-200">
                                         Home
                                     </a>
                                 </Link>
                             </li>
                             <li className="nav-item pr-2">
                                 <Link href="/explore">
-                                    <a className="mr-6 text-violet-300 transition duration-300 ease-in-out hover:text-violet-200">
+                                    <a className="mr-2 xs:mr-4 text-violet-300 transition duration-300 ease-in-out hover:text-violet-200">
                                         Explore
                                     </a>
                                 </Link>
                             </li>
                             <li className="nav-item pr-2">
                                 <Link href="/mint-nft">
-                                    <a className="mr-6 text-violet-300 transition duration-300 ease-in-out hover:text-violet-200">
+                                    <a className="mr-2 xs:mr-4 text-violet-300 transition duration-300 ease-in-out hover:text-violet-200">
                                         Mint NFT
                                     </a>
                                 </Link>

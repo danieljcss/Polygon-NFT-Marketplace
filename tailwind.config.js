@@ -1,4 +1,5 @@
-/* tailwind.config.js */
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -20,8 +21,12 @@ module.exports = {
         'lg': '992px',
       },
     },
-
+    screens: {
+      'xs': '520px',
+      ...defaultTheme.screens,
+    },
   },
+
   plugins: [
     require('tw-elements/dist/plugin'),
   ]

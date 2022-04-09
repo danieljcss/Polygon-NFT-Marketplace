@@ -78,23 +78,36 @@ export default function Home(props) {
   if (loadingState === 'loaded' && !nfts.length) return (
     <>
       <Banner />
-      <h1 className="px-20 py-10 text-2xl text-violet-100 flex justify-center">No items in marketplace</h1>
+      <h1 className="px-10 sm:px-20 py-10 text-2xl text-violet-100 flex justify-center">No items in marketplace</h1>
     </>
   )
 
   return (
     <>
       <Banner />
-      <h1 className="px-20 py-10 text-3xl text-violet-100 flex justify-center">Featured NFTs</h1>
+      <h1 className="px-10 sm:px-20 py-10 text-3xl text-violet-100 flex justify-center">Featured NFTs</h1>
       <div className="flex justify-center">
         <div className="px-4" style={{ maxWidth: '1600px' }}>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 pt-4">
-            {
-              nfts.slice(0, 12).map((nft, i) => (
-                <NFTBlock key={i} nft={nft} buyNft={buyNft} />
-              ))
-            }
-          </div>
+          {loadingState === 'loaded' && nfts.length ? (
+            <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-4">
+              {
+                nfts.slice(0, 12).map((nft, i) => (
+                  <NFTBlock key={i} nft={nft} buyNft={buyNft} />
+                ))
+              }
+            </div>
+          ) : (
+            <div className="text-center my-10">
+              <div className="spinner-border animate-spin
+            inline-block
+            w-10 h-10
+            border-4 rounded-full
+            text-violet-100
+            " role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>

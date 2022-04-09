@@ -19,15 +19,18 @@ export async function web3Connect() {
 }
 
 export async function web3Load() {
-    const { ethereum } = window
-    const providerTest = new ethers.providers.Web3Provider(ethereum)
-    const accountsTest = await providerTest.listAccounts()
+    //const { ethereum } = window
+    //const providerTest = new ethers.providers.Web3Provider()
+    //const accountsTest = await providerTest.listAccounts()
+    const providerRPC = new ethers.providers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com/')
+    const contract = new ethers.Contract(marketplaceAddress, contractJson.abi, providerRPC)
+    const accountsTest = await providerRPC.listAccounts()
 
     if (accountsTest.length > 0) {
         return web3Connect()
     } else {
-        const providerRPC = new ethers.providers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com/')
-        const contract = new ethers.Contract(marketplaceAddress, contractJson.abi, providerRPC)
+        //const providerRPC = new ethers.providers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com/')
+        //const contract = new ethers.Contract(marketplaceAddress, contractJson.abi, providerRPC)
         return { contract: contract, provider: providerRPC }
     }
 }
