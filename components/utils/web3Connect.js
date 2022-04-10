@@ -19,18 +19,24 @@ export async function web3Connect() {
 }
 
 export async function web3Load() {
-    //const { ethereum } = window
-    //const providerTest = new ethers.providers.Web3Provider()
-    //const accountsTest = await providerTest.listAccounts()
-    const providerRPC = new ethers.providers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com/')
-    const contract = new ethers.Contract(marketplaceAddress, contractJson.abi, providerRPC)
-    const accountsTest = await providerRPC.listAccounts()
+    // Connect to Metamask provider if injected
+    if (window.ethereum) {
+        const providerTest = new ethers.providers.Web3Provider(window.ethereum)
+        const accountsTest = await providerTest.listAccounts()
 
-    if (accountsTest.length > 0) {
-        return web3Connect()
-    } else {
-        //const providerRPC = new ethers.providers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com/')
-        //const contract = new ethers.Contract(marketplaceAddress, contractJson.abi, providerRPC)
+        if (accountsTest.length > 0) {
+            return web3Connect()
+        } else {
+            const contract = new ethers.Contract(marketplaceAddress, contractJson.abi, providerTest)
+
+            return { contract: contract, provider: providerTest }
+        }
+    }
+    // Otherwise connect to Mumbai RPC (for users without Metamask)
+    else {
+        const providerRPC = new ethers.providers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com/')
+        const contract = new ethers.Contract(marketplaceAddress, contractJson.abi, providerRPC)
+
         return { contract: contract, provider: providerRPC }
     }
 }
