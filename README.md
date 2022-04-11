@@ -42,4 +42,4 @@ This Next.js app can be deployed for free using the [Vercel Platform](https://ve
 - Hardat: Deployement and testing of smart contracts (+ waffle and chai)
 - Ethers.js: Web3 provider for JavaScript
 
-Project based on [Nader Dabit tutorial](https://dev.to/dabit3/building-scalable-full-stack-apps-on-ethereum-with-polygon-2cfb)
+Project based on a Nader Dabit tutorial
