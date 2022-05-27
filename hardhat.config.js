@@ -1,7 +1,4 @@
-require("dotenv").config()
 require("@nomiclabs/hardhat-waffle")
-
-const PRIVATE_KEY = process.env.PRIVATE_KEY
 
 module.exports = {
   defaultNetwork: "hardhat",
@@ -10,7 +7,7 @@ module.exports = {
       chainId: 1337
     },
     mumbai: {
-      url: "https://rpc-mumbai.maticvigil.com",
+      url: `https://polygon-mumbai.infura.io/v3/${process.env.INFURA_ID}`,
       accounts: [PRIVATE_KEY]
     }
   },
