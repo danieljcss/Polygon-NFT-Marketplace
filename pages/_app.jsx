@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import Layout from '../components/layout'
 import { useState, useEffect } from 'react'
 import { web3Connect, web3Load } from '../components/utils/web3Connect'
+import {changeNetwork} from '../components/utils/changeNetwork'
 
 function MyApp({ Component, pageProps }) {
   const [account, setAccount] = useState(null)
@@ -26,11 +27,16 @@ function MyApp({ Component, pageProps }) {
   // Connects to Metamask if not done yet
   async function connect(e) {
     e.preventDefault()
-    const connect = await web3Connect()
-    setAccount(connect.account)
-    setProvider(connect.provider)
-    setContract(connect.contract)
-
+    await changeNetwork()
+    let connect
+    try {
+      connect = await web3Connect()
+      setAccount(connect.account)
+      setProvider(connect.provider)
+      setContract(connect.contract)
+    } catch (error) {
+      console.log('Wallet connection failed: ', error)
+    }
     return (connect)
   }
 
