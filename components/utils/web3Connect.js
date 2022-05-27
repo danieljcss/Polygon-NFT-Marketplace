@@ -19,8 +19,18 @@ export async function web3Connect() {
 }
 
 export async function web3Load() {
-    // Connect to Metamask provider if injected
-    if (window.ethereum) {
+    // Connect to Metamask provider if injected to the right network
+    let hasRightnetwork;
+    if (window.ethereum !== undefined) {
+        if (window.ethereum.networkVersion == '80001') {
+            hasRightnetwork = true
+        }
+        else hasRightnetwork = false
+    } else {
+        hasRightnetwork = false
+    }
+
+    if (hasRightnetwork) {
         const providerTest = new ethers.providers.Web3Provider(window.ethereum)
         const accountsTest = await providerTest.listAccounts()
 
@@ -34,7 +44,7 @@ export async function web3Load() {
     }
     // Otherwise connect to Mumbai RPC (for users without Metamask)
     else {
-        const providerRPC = new ethers.providers.JsonRpcProvider('https://rpc-mumbai.maticvigil.com/')
+        const providerRPC = new ethers.providers.JsonRpcProvider(`https://polygon-mumbai.infura.io/v3/${process.env.INFURA_ID}`)
         const contract = new ethers.Contract(marketplaceAddress, contractJson.abi, providerRPC)
 
         return { contract: contract, provider: providerRPC }
